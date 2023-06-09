@@ -1,6 +1,7 @@
 <script lang="ts">
   import ChecIcon from "../assets/ChekIcon.svg";
   import jwt_decode from "jwt-decode";
+  import { Button, Textfield } from "svelte-mui";
 
   const decoded = localStorage.getItem("token")
     ? jwt_decode(localStorage.getItem("token"))
@@ -35,7 +36,7 @@
         } else {
           err_message = data.message;
           error = true;
-          e.target.reset()
+          e.target.reset();
         }
       });
   }
@@ -51,7 +52,7 @@
     <div class="succses__card">
       <img src={ChecIcon} alt="" />
       <h4 class="card__title">Succsefuly</h4>
-      <button class="formik__btn" on:click={HandleLogOut}>Log out</button>
+      <Button raised color="primary" on:click={HandleLogOut}>Log Out</Button>
     </div>
   {/if}
 
@@ -61,55 +62,39 @@
     {/if}
     <h1 class="title">Sign Up</h1>
     <form class="formik" on:submit|preventDefault={HandleRegister}>
-      <div>
-        <label class="formik_label" for="username">Username</label>
-        <input
-          class="formik__input"
+        <Textfield
+          outlined
           id="username"
           bind:value={username}
-          name="username"
           type="text"
           placeholder="Your Username"
         />
-      </div>
 
-      <div>
-        <label class="formik_label" for="password">Password</label>
-        <input
-          class="formik__input"
+        <Textfield
+          outlined
           id="password"
           bind:value={password}
-          name="password"
           type="password"
           placeholder="Your Password"
         />
-      </div>
 
-      <div>
-        <label class="formik_label" for="password">Repeat Password</label>
-        <input
-          class="formik__input"
+        <Textfield
+          outlined
           id="repeat_password"
           bind:value={repeat_password}
-          name="password"
           type="password"
           placeholder="Repeat Password"
         />
-      </div>
 
-      <div>
-        <label class="formik_label" for="email">Your Email</label>
-        <input
-          class="formik__input"
-          id="email"
-          bind:value={email}
-          name="email"
-          type="email"
-          placeholder="Your Email"
-        />
-      </div>
+      <Textfield
+        outlined
+        placeholder="Your Email"
+        id="email"
+        type="email"
+        bind:value={email}
+      />
 
-      <button class="formik__btn">Sign Up</button>
+      <Button raised color="primary">Sign Up</Button>
     </form>
   {/if}
 </div>
@@ -117,8 +102,8 @@
 <style>
   .box {
     padding: 20px;
-    width: 400px;
-    min-height: 350px;
+    width: 300px;
+    min-height: 300px;
     border-radius: 32px;
     background-color: #ffffff;
     display: flex;
@@ -128,29 +113,6 @@
 
   .error {
     color: red;
-  }
-
-  .formik {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 70%;
-  }
-
-  .formik div {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-
-  .formik_label {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    text-transform: capitalize;
-    font-feature-settings: "pnum" on, "lnum" on;
-    color: #151435;
   }
 
   .title {
@@ -171,37 +133,5 @@
     margin-top: 15px;
     color: #2ecc71;
     font-weight: bold;
-  }
-
-  .formik__input {
-    display: block;
-    min-height: 30px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    outline: none;
-    font-weight: 500;
-    font-size: 16px;
-    padding-left: 10px;
-    width: 95%;
-  }
-
-  .formik__btn {
-    border: 1px solid #cccccc;
-    background-color: #151435 !important;
-    border-radius: 6px !important;
-    color: #ffffff !important;
-  }
-
-  .formik__btn:hover {
-    background-color: #ffffff !important;
-    border: 1px solid #000000;
-    color: #000000 !important;
-  }
-
-  @media screen and (max-width: 470px) {
-    .box {
-      min-width: 270px;
-      min-height: 350px;
-    }
   }
 </style>
